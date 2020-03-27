@@ -1,0 +1,81 @@
+<div class="image">
+  <div class="container">
+    <div id="login" class="signin-card bg-dark text-white">
+      <div class="logo-image">
+        <h3>FormaLab</h3>
+        <img src="../../assets/forma.png" alt="Logo" title="Logo" width="138" />
+      </div>
+      <div class="displayTable">
+        <div class="displayTableCell">
+          <div class="authBlock">
+            <h3>Sign In</h3>
+            <div class="formGroup">
+              <input
+                for="inputlg"
+                type="text"
+                class="formControl text-dark"
+                placeholder="Username"
+                #userName
+                required
+              />
+            </div>
+
+            <div class="formGroup">
+              <input
+                for="inputlg"
+                type="password"
+                class="formControl text-dark"
+                placeholder="Password"
+                #userPassword
+                required
+              />
+            </div>
+
+            <!-- Calling SignIn Api from AuthService -->
+            <div class="formGroup">
+              <input
+                type="button"
+                class="btn btn-primary"
+                value="Log in"
+                (click)="authService.SignIn(userName.value, userPassword.value)"
+              />
+            </div>
+
+            <div class="formGroup">
+              <span class="or"><span class="orInner">Or</span></span>
+            </div>
+
+            <!-- Calling GoogleAuth Api from AuthService -->
+            <div class="formGroup bg-dark text-white">
+              <button
+                type="button"
+                class="btn btn-link"
+                (click)="authService.GoogleAuth()"
+              >
+                <i class="fab fa-google-plus-g"></i>
+                Log in with Google
+              </button>
+            </div>
+
+            <div class="forgotPassword">
+              <span routerLink="/forgot-password">
+                <button type="button" class="btn btn-link">
+                  Forgot Password?
+                </button></span
+              >
+            </div>
+          </div>
+
+          <div class="redirectToLogin">
+            <span
+              >Don't have an account?
+              <span class="redirect" routerLink="/register-user">
+                <button type="button" class="btn btn-info">Sign Up</button>
+              </span></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

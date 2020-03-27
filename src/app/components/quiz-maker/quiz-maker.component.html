@@ -1,0 +1,170 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/dashboard"><img src="../../assets/forma.png" alt="Logo"
+      width="30" height="30" />
+    FormaLab</a>
+
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link text-white" routerLink="/dashboard">
+        Go Back Home
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" (click)="authService.SignOut()">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>SignOut
+      </a>
+    </li>
+  </ul>
+
+</nav>
+
+
+<div class="container">
+  <h1>FormaLab Quiz Maker</h1>
+</div>
+<div class="container">
+  <div *ngIf="model && !report" class="padding20 white-bg">
+    <div class="spacer30"></div>
+    <div class="row">
+      <div class="col-4">
+
+        <h4 (click)="test()">Add Quiz Questions</h4>
+        <!--a draggable element-->
+        <div class="fields" *ngFor="let item of fieldModels">
+          <div class="field pointer shadow-bg" [dndDraggable]="item" [dndEffectAllowed]="'copy'"
+            (dndEnd)="onDragEnd($event)">
+            <i [ngClass]="item.icon" class="fa pull-left"></i>
+            <h5>{{item.label}}</h5>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-8">
+
+        <div class="form-group" style="margin-bottom: 0px !important; padding: 30px 60px 5px 60px;">
+          <h2><input class="form-control" type="text" [(ngModel)]="model.name" /></h2>
+          <input class="form-control" type="text" [(ngModel)]="model.description" />
+        </div>
+
+        <!--a dropzone-->
+        <!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->
+        <section dndDropzone (dndDragover)="onDragover($event)" (dndDrop)="onDrop($event,model.attributes)"
+          class="dndDropArea" [ngClass]="{'empty':model.attributes.length == 0}">
+
+          <div class="field" *ngFor="let item of model.attributes;let i= index;" (dndStart)="onDragStart($event)"
+            (dndCanceled)="onDragCanceled($event)" (dndMoved)="onDragged(item, model.attributes, 'move')"
+            [dndEffectAllowed]="'all'" [dndDraggable]="item">
+            <div class="row form-group">
+              <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+              <div class="col-7">
+                <!-- <i [ngClass]="item.icon" class="fa pull-left"></i>
+              <h5>{{item.label}}
+              <span *ngIf="item.required" class="red">*</span></h5> -->
+                <div *ngIf="item.type=='radio'">
+                  <label>{{item.label}}</label> <label *ngIf="item.required" class="text-danger">*</label>
+                  <div *ngFor="let v of item.values" class="inline-form-group">
+                    <label class="cust-check-bx">
+                      <input type="radio" [value]="v.value" name="{{item.name}}"> {{v.label}}
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4">
+                <i *ngIf="item.toggle" (click)="item.toggle=false" class="fa fa-chevron-up pull-right"></i>
+                <i *ngIf="!item.toggle" (click)="item.toggle=true" class="fa fa-chevron-down pull-right"></i>
+                <i (click)="removeField(i)" class="fa fa-trash pull-right"></i>
+              </div>
+            </div>
+            <div *ngIf="item.toggle" class="toggle-Wrapper">
+              <div class="form-group">
+                <label>Required</label>
+                <i *ngIf="item.required" (click)="item.required=false" class="fa fa-toggle-on red"></i>
+                <i *ngIf="!item.required" (click)="item.required=true" class="fa fa-toggle-off"></i>
+                <span class="pull-right ucfirst">{{item.type}}</span>
+              </div>
+              <div class="form-group">
+                <label>Label</label>
+                <input class="form-control" type="text" [(ngModel)]="item.label" />
+              </div>
+              <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" type="text" [(ngModel)]="item.name" />
+              </div>
+
+              <!-- radio || checkbox -->
+              <div *ngIf="item.type=='radio'|| item.type=='checkbox'">
+                <div class="row">
+                  <div class="col-5">
+                    <div class="form-group">
+                      <label>Options</label>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="form-group">
+                      <label>Score from 0 to 5</label>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group">
+                      <label>Action</label>
+                    </div>
+                  </div>
+                </div>
+                <div *ngFor="let i of item.values; let valueIndex=index;" class="row">
+                  <div class="col-5">
+                    <div class="form-group">
+                      <input class="form-control" type="text" [(ngModel)]="i.label" />
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="form-group">
+                      <input class="form-control" type="text" [(ngModel)]="i.value" />
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group">
+                      <label (click)="item.values.splice(valueIndex,1)">remove</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-5">
+                    <div class="form-group">
+                      <input class="form-control" type="text" [(ngModel)]="value.label" />
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="form-group">
+                      <input class="form-control" type="text" [(ngModel)]="value.value" />
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <div class="form-group">
+                      <label (click)="addValue(item.values)">Add</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            </div>
+          </div>
+          <!--optional placeholder element for dropzone-->
+          <!--will be removed from DOM on init-->
+          <div class="dndPlaceholder" dndPlaceholderRef>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <p (click)="show=1" class="marginT60 pointer"><button type="button" (click)="myFunc()" class="btn btn-primary">Save
+      Template</button></p>
+  <!--<pre *ngIf="show==1 && model">
+    {{model|json}}
+</pre>-->
+</div>

@@ -1,0 +1,27 @@
+<div #content class="content">
+  <div style="width:100vw; height:100vh; padding:20px; text-align:center; border: 10px solid #FFAA00">
+    <div style="width:200vh; height:90vh; padding:20px; text-align:center; border: 5px solid #787878">
+      <span style="font-size:50px; font-weight:bold"> <img src="../../../assets/forma.png" alt="FormaLab Logo"
+          width="70" height="70" class="d-inline-block align-top"> Certificate of Completion</span>
+      <br /><br />
+      <span style="font-size:25px"><i>This is to certify that</i></span>
+      <br /><br />
+      <span style="font-size:30px ;color: #FFAA00"><b>{{certificationData.student | uppercase}}</b></span><br /><br />
+      <span style="font-size:25px"><i>has completed the course</i></span>
+      <br /><br />
+      <span style="font-size:30px ;color: #FFAA00 ;">{{certificationData.quiz_name | uppercase}}</span> <br /><br />
+      <span style="font-size:20px; font-weight:bold"><i>FormaLab CEO : Ayoub Ghozzi</i> </span><br />
+      <span style="font-size:25px"><i><img src="../../../assets/signature.PNG" alt="Ayoub Signature" width="70"
+            height="70"></i></span>
+      <br />
+
+      <span style="font-size:15px "><i> Dated : {{currentDate | date:'dd-MM-yyyy'}}</i></span><br />
+
+      <span style="font-size:10px "><i>FormaLab&copy; {{currentDate | date:'yyyy'}} Téléphone : 58 921 953 Adresse :
+          Rue
+          Palestine,19 rue Yahia Turki ,
+          Tunis , Lafayette Lafayette 1001</i></span><br /><br />
+
+    </div>
+  </div>
+</div>

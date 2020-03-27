@@ -1,0 +1,22 @@
+<div class="card">
+  <table class="table table-bordered" *ngIf="authService.userData as user">
+    <thead>
+      <tr>
+        <th scope="col">Test</th>
+        <th scope="col">Test Description</th>
+        <th scope="col">My Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let index of scoresList">
+        <td *ngIf="user.displayName == index.student">
+          {{ index.quiz_name }}
+        </td>
+        <td *ngIf="user.displayName == index.student">
+          {{ index.quiz_description }}
+        </td>
+        <td *ngIf="user.displayName == index.student">{{ index.Score }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,132 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand text-white" routerLink="/dashboard"><img src="../../assets/forma.png" alt="Logo" width="30"
+      height="30" class="d-inline-block align-top" />
+    FormaLab</a>
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()" data-toggle="collapse" data-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
+    <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link text-white" (click)="authService.SignOut()">
+          SignOut
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item box">
+            <a class="nav-link text-white text-uppercase">
+              {{ authService.userData.displayName }}
+            </a>
+          </li>
+          <li class="nav-item box" *ngIf="authService.userData as user">
+            <a class="nav-link text-white" *ngIf="user.displayName == 'sallemi oussema'" routerLink="/quiz-maker">
+              Add New Quiz
+            </a>
+          </li>
+          <li class="nav-item box">
+            <a class="nav-link text-white" routerLink="/dashboard/panel" routerLinkActive="active-link">
+              My Exams
+            </a>
+          </li>
+          <li class="nav-item box">
+            <a class="nav-link text-white" routerLink="/dashboard/score">
+              My FormaLab Scores
+            </a>
+          </li>
+          <li class="nav-item box">
+            <a class="nav-link text-white" routerLink="/dashboard/certifications">
+              My Certifications
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="inner-adjust">
+        <div class="container-fluid">
+          <main role="main">
+            <div class="inner-adjust">
+              <div>
+                <h2>FormaLab QUIZ</h2>
+                
+                <div>
+                  <router-outlet></router-outlet>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </main>
+  </div>
+</div> -->
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/dashboard"><img src="../../assets/forma.png" alt="Logo"
+      width="30" height="30" />
+    FormaLab</a>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link text-white" (click)="authService.SignOut()">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>SignOut
+      </a>
+    </li>
+  </ul>
+
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link text-uppercase">
+              <span class="fa fa-user"></span> {{ authService.userData.displayName }}
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="authService.userData as user">
+            <a class="nav-link" *ngIf="user.displayName == 'sallemi oussema'" routerLink="/quiz-maker">
+              <span class="fa fa-plus-square"></span> Add New Quiz
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard/panel" routerLinkActive="active-link">
+              <span class="fa fa-file-text-o" aria-hidden="true"></span> My Exams
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard/score">
+              <span class="fa fa-star" aria-hidden="true"></span> My FormaLab Scores
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard/certifications">
+              <span class="fa fa-certificate" aria-hidden="true"></span> My Certifications
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+      <div class="container-fluid">
+        <main role="main">
+          <div>
+            <router-outlet></router-outlet>
+          </div>
+        </main>
+      </div>
+
+    </main>
+  </div>
+</div>

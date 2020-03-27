@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand text-white" routerLink="/dashboard"
+    ><img
+      src="../../assets/forma.png"
+      alt="Logo"
+      width="30"
+      height="30"
+      class="d-inline-block align-top"
+    />
+    FormaLab</a
+  >
+  <button
+    class="navbar-toggler"
+    type="button"
+    (click)="toggleNavbar()"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
+    <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link text-white" routerLink="/dashboard">
+          Go Back Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" (click)="authService.SignOut()">
+          SignOut
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>{{ quizName.quiz_name }} Quiz</h1>
+</div>
+<div class="container">
+  <p>Quiz Description : {{ quizName.quiz_description }}</p>
+</div>
+<div class="container">
+  <div *ngFor="let item of formData; let index = index">
+    <div *ngIf="item.type == 'radio'">
+      <label>{{ item.label }}</label>
+      <label *ngIf="item.required" class="text-danger">*</label>
+      <div
+        *ngFor="let x of item.values"
+        class="inline-form-group"
+        id="{{ index }}"
+      >
+        <label class="cust-check-bx">
+          <input
+            type="radio"
+            [value]="x.value"
+            name="{{ item.name }}"
+            [(ngModel)]="item.value"
+            [ngModelOptions]="{ standalone: true }"
+            (change)="onItemChange(x, index)"
+          />
+          {{ x.label }}
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="btn-cont">
+    <button type="button" (click)="submit(v)" class="btn btn-outline-dark">
+      Submit
+    </button>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+  <div id="login" class="signin-card bg-dark text-white">
+    <div class="logo-image">
+      <h3>FormaLab</h3>
+      <img src="../../assets/forma.png" alt="Logo" title="Logo" width="138" />
+    </div>
+    <div class="displayTable">
+      <div class="displayTableCell">
+        <div class="authBlock">
+          <h3>Sign Up</h3>
+
+          <div class="formGroup">
+            <input
+              type="email"
+              class="formControl text-dark"
+              placeholder="Email Address"
+              #userEmail
+              required
+            />
+          </div>
+
+          <div class="formGroup">
+            <input
+              type="password"
+              class="formControl text-dark"
+              placeholder="Password"
+              #userPwd
+              required
+            />
+          </div>
+
+          <div class="formGroup">
+            <input
+              type="button"
+              class="btn btn-primary"
+              value="Sign Up"
+              (click)="authService.SignUp(userEmail.value, userPwd.value)"
+            />
+          </div>
+
+          <div class="formGroup">
+            <span class="or"><span class="orInner">Or</span></span>
+          </div>
+
+          <!-- Continue with Google -->
+          <div class="formGroup">
+            <button
+              type="button"
+              class="btn btn-link"
+              (click)="authService.GoogleAuth()"
+            >
+              <i class="fab fa-google-plus-g"></i>
+              Continue with Google
+            </button>
+          </div>
+        </div>
+
+        <div class="redirectToLogin">
+          <span
+            >Already have an account?
+            <span class="redirect" routerLink="/sign-in">
+              <button type="button" class="btn btn-info">Log In</button></span
+            ></span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+
+  <div class="container"></div>
+  <div class="title-group">
+    <h2 class="mat-h1">Quiz List</h2>
+  </div>
+  <div class="container">
+    <div class="card-columns">
+      <div class="card" *ngFor="let quiz of labels; let index = index">
+        <div class="card-header text-center">{{ quiz }}</div>
+        <div class="card-body text-center">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="toggle(index)"
+            id="{{ index }}"
+            routerLink="/form"
+          >
+            Take the {{ quiz }} Quiz Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+

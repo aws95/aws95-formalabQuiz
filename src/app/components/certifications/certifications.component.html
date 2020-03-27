@@ -1,0 +1,34 @@
+<div class="card">
+  <table class="table table-bordered" *ngIf="authService.userData as user">
+    <thead>
+      <tr>
+        <th scope="col">Test</th>
+        <th scope="col">Test Description</th>
+        <th scope="col">Certification</th>
+        <th scope="col">Download
+          Certificate</th>
+        <th scope="col">View
+          Certificate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let v of scoresList; let index = index">
+        <td>{{ index + 1}}</td>
+        <td *ngIf="user.displayName == v.student">
+          {{ v.quiz_name }}
+        </td>
+        <td *ngIf="user.displayName == v.student">
+          {{ v.quiz_description }}
+        </td>
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="download(index)" id="{{ index }}"><i
+              class="fa fa-download"></i></button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="view(i)"
+            target="_blank"><i class="fa fa-eye"></i> </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
